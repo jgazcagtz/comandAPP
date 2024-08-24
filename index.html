@@ -1,0 +1,647 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Gallito Bien Happy - Waiter & Kitchen App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FF6B35;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 10px;
+            background-color: white;
+            color: #FF6B35;
+            border-bottom: 4px solid #fff;
+        }
+
+        header img {
+            width: 120px;
+            height: 120px;
+            object-fit: scale-down;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 1em;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .intro-section {
+            text-align: center;
+            background-color: #FF6B35;
+            color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color: #FF6B35;
+            padding: 10px 15px;
+            border-radius: 50px;
+            margin: 20px auto;
+            width: fit-content;
+            position: relative;
+        }
+
+        .horizontal-product-grid,
+        .vertical-product-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        .vertical-product-grid {
+            flex-direction: column;
+        }
+
+        .horizontal-product-item,
+        .vertical-product-item {
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 280px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .horizontal-product-item img,
+        .vertical-product-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .horizontal-product-item h3,
+        .vertical-product-item h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .horizontal-product-item p,
+        .vertical-product-item p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .choose-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .choose-btn:hover {
+            background-color: white;
+            color: #FF6B35;
+            border: 1px solid #FF6B35;
+        }
+
+        select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: white;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        #cart {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-width: 90%;
+            display: none;
+            overflow-y: auto;
+            max-height: 80vh;
+            z-index: 1000;
+        }
+
+        #cart h3 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        #cart-items p {
+            margin-bottom: 15px;
+        }
+
+        #cart-total {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        #order-notes {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #FF6B35;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            border-top: 4px solid #FF6B35;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+
+        #whatsapp-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #whatsapp-btn:hover {
+            background-color: #1EBB60;
+        }
+
+        #refresh-btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #refresh-btn:hover {
+            background-color: #FF6B35;
+            color: white;
+        }
+
+        #edit-cart-btn {
+            padding: 10px 20px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #edit-cart-btn:hover {
+            background-color: #333;
+        }
+
+        #cart-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+
+        #cart-btn:hover {
+            background-color: #333;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .quantity-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 5px;
+        }
+
+        .quantity-btn:hover {
+            background-color: #FF6B35;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header img {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            .choose-btn {
+                font-size: 0.8em;
+            }
+
+            #cart-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header img {
+                width: 80px;
+                height: 80px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            p {
+                font-size: 0.8em;
+            }
+
+            .horizontal-product-item img,
+            .vertical-product-item img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .horizontal-product-item h3,
+            .vertical-product-item h3 {
+                font-size: 1em;
+            }
+
+            #cart {
+                bottom: 5px;
+                right: 5px;
+                width: 90%;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://st3.depositphotos.com/29384342/35247/v/380/depositphotos_352476890-stock-illustration-cartoon-rooster-holding-fried-chicken.jpg" alt="Logo">
+        <h1>El Gallito Bien Happy</h1>
+        <h2>COMANDA - Mesero y Cocina</h2>
+    </header>
+    <main>
+        <div class="intro-section">
+            <p>1) Selecciona los productos del menú y añádelos al carrito.</p>
+            <p>2) Cuando termines, revisa el pedido y envíalo a la cocina por WhatsApp.</p>
+            <p>Las notas adicionales están disponibles en el carrito.</p>
+            <p>Pide ayuda a tu supervisor para utilizar esta herramienta.</p>
+        </div>
+
+        <div id="cart">
+            <h3>🛒 Carrito</h3>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <p>Notas:</p>
+            <textarea id="order-notes" placeholder="Agrega notas adicionales..." oninput="updateWhatsAppLink()"></textarea>
+            <p><a id="whatsapp-btn" href="#" target="_blank">Enviar orden a cocina</a></p>
+            <button id="edit-cart-btn" onclick="toggleModal()">Revisar Detalles</button>
+            <button id="refresh-btn" onclick="clearCart()">Limpiar Orden</button>
+        </div>
+        <button id="cart-btn" onclick="toggleCart()">🛒</button>
+        
+        <div class="menu-title-container">
+            <h2>🍗 Nuestros Favoritos</h2>
+        </div>
+        <div id="menu-horizontal" class="horizontal-product-grid"></div>
+        
+        <div class="menu-title-container">
+            <h2>🍗 Menú</h2>
+        </div>
+        <div id="menu-vertical" class="vertical-product-grid"></div>
+    </main>
+    <footer>
+        <p>¡Gracias por tu esfuerzo!</p>
+        <p>El Gallito Bien Happy - Derechos Reservados <span style="font-size:0.8em;">®</span> 2024</p>
+    </footer>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalles de la Orden</h2>
+                <span class="close" onclick="toggleModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="edit-cart-items"></div>
+            <div class="modal-footer">
+                <button class="choose-btn" onclick="toggleModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Info Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleProductModal()">&times;</span>
+            <div id="product-modal-content"></div>
+            <button class="choose-btn" onclick="addProductToCart()">Añadir al Carrito</button>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const products = [
+            { name: "Hamburguesa Especial", img: "https://static8.depositphotos.com/1003814/1018/i/380/depositphotos_10183327-stock-photo-big-hamburger-french-fries-and.jpg", price: 159.99, includes: "Crujiente, fresca y jugosa." },
+            { name: "Combo Pollo Frito", img: "https://st3.depositphotos.com/23848204/31779/i/380/depositphotos_317794456-stock-photo-homemade-fried-chicken-french-fries.jpg", price: 179.99, includes: "Para chuparse los dedos." },
+            { name: "Festín Familiar", img: "https://static8.depositphotos.com/1328914/862/i/380/depositphotos_8628755-stock-photo-fried-chicken-meal.jpg", price: 299.99, includes: "12 piezas de pollo, ensalada y bisquets." },
+            { name: "Combo Variado", img: "https://st4.depositphotos.com/8687452/38373/i/380/depositphotos_383737694-stock-photo-fried-chicken-french-fries-nuggets.jpg", price: 199.99, includes: "Para los indecisos." },
+            { name: "Alitas Picantes", img: "https://st2.depositphotos.com/1031681/5785/i/380/depositphotos_57858061-stock-photo-fried-chicken-wings-in-batter.jpg", price: 149.99, includes: "No aptas para principiantes." },
+            { name: "Nuggets con Salsas", img: "https://st3.depositphotos.com/13349494/31763/i/380/depositphotos_317631476-stock-photo-delicious-chicken-nuggets-ketchup-mayonnaise.jpg", price: 129.99, includes: "¿Un antojito?" },
+            { name: "Tiras de Pollo", img: "https://st.depositphotos.com/1031681/4536/i/380/depositphotos_45365775-stock-photo-chicken-stripsy%C2%A0.jpg", price: 139.99, includes: "Deliciosas tiritas de pollo." },
+            { name: "Pollo Frito Casero", img: "https://st.depositphotos.com/1692343/4163/i/380/depositphotos_41631619-stock-photo-homemade-southern-fried-chicken.jpg", price: 169.99, includes: "Como en casa." },
+            { name: "Alitas de Pollo BBQ", img: "https://freerangestock.com/thumbnail/123137/chicken-wings--bbq-party-.jpg", price: 159.99, includes: "Alitas bañadas en salsa BBQ." },
+            { name: "Deliciosas Tartas", img: "https://freerangestock.com/thumbnail/21202/deliious-tarts.jpg", price: 99.99, includes: "Tartas dulces perfectas para el postre." },
+            { name: "Flan Puertorriqueño", img: "https://freerangestock.com/thumbnail/136655/puerto-rican-flan.jpg", price: 89.99, includes: "Flan tradicional, suave y cremoso." },
+            { name: "Refresco", img: "https://freerangestock.com/thumbnail/2286/soda-illustration.jpg", price: 35.00, includes: "CocaCola, Sprite, Fanta, CocaZero." }
+        ];
+
+        let cart = [];
+        let total = 0;
+        let totalItems = 0;
+        let selectedProduct = null;
+
+        window.createProductElement = function(product, index, layout = 'horizontal') {
+            const productItem = document.createElement('div');
+            productItem.classList.add(layout === 'horizontal' ? 'horizontal-product-item' : 'vertical-product-item');
+            productItem.innerHTML = `
+                <img src="${product.img}" alt="${product.name}">
+                <div>
+                    <h3>${product.name}</h3>
+                    <p>$${product.price.toFixed(2)}</p>
+                    <p>${product.includes}</p>
+                    <select id="quantity-${index}" onchange="updateSelectedProductQuantity(${index})">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <p><button class="choose-btn" onclick="showProductModal(${index})">Elegir</button></p>
+                </div>
+            `;
+            return productItem;
+        }
+
+        window.displayProducts = function(productsToDisplay, layout = 'horizontal', containerId) {
+            const menu = document.getElementById(containerId);
+            menu.innerHTML = '';
+            productsToDisplay.forEach((product, index) => {
+                menu.appendChild(createProductElement(product, index, layout));
+            });
+        }
+
+        window.updateSelectedProductQuantity = function(index) {
+            const quantitySelect = document.getElementById(`quantity-${index}`);
+            selectedProduct = { ...products[index], quantity: parseInt(quantitySelect.value) };
+        }
+
+        window.showProductModal = function(index) {
+            const quantitySelect = document.getElementById(`quantity-${index}`);
+            const quantity = parseInt(quantitySelect.value);
+            selectedProduct = { ...products[index], quantity };
+
+            const modalContent = document.getElementById('product-modal-content');
+            modalContent.innerHTML = `
+                <h3>${selectedProduct.name}</h3>
+                <img src="${selectedProduct.img}" alt="${selectedProduct.name}" style="width: 100px; height: 100px;">
+                <p>Precio: $${selectedProduct.price.toFixed(2)}</p>
+                <p>${selectedProduct.includes}</p>
+                <p>Cantidad: ${selectedProduct.quantity}</p>
+            `;
+
+            toggleProductModal();
+        };
+
+        window.addProductToCart = function() {
+            const existingProduct = cart.find(item => item.name === selectedProduct.name);
+
+            if (existingProduct) {
+                existingProduct.quantity += selectedProduct.quantity;
+            } else {
+                cart.push({ ...selectedProduct });
+            }
+
+            updateCart();
+            toggleProductModal();
+            alert(`Producto agregado al carrito: ${selectedProduct.name} x ${selectedProduct.quantity}`);
+        };
+
+        window.updateCart = function() {
+            const cartItemsSection = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const editCartItems = document.getElementById('edit-cart-items');
+
+            cartItemsSection.innerHTML = '';
+            editCartItems.innerHTML = '';
+            total = 0;
+            totalItems = 0;
+
+            cart.forEach((item, index) => {
+                cartItemsSection.innerHTML += `<p>${item.name} - $${item.price.toFixed(2)} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}</p>`;
+                editCartItems.innerHTML += `
+                    <p>
+                        ${item.name} - 
+                        <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+                        ${item.quantity}
+                        <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+                        = $${(item.price * item.quantity).toFixed(2)}
+                        <button onclick="removeCartItem(${index})">Eliminar</button>
+                    </p>`;
+                total += item.price * item.quantity;
+                totalItems += item.quantity;
+            });
+
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            updateWhatsAppLink();
+        }
+
+        window.increaseQuantity = function(index) {
+            cart[index].quantity += 1;
+            updateCart();
+        };
+
+        window.decreaseQuantity = function(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                removeCartItem(index);
+            }
+            updateCart();
+        };
+
+        window.removeCartItem = function(index) {
+            cart.splice(index, 1);
+            updateCart();
+        };
+
+        window.updateWhatsAppLink = function() {
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const orderNotes = document.getElementById('order-notes').value || 'Sin notas adicionales';
+            const message = `Orden para cocina:\n${cart.map(item => `${item.name} (${item.quantity})`).join('\n')}\n\nTotal de Productos: ${totalItems}\n\nNotas: ${orderNotes}`;
+            const encodedMessage = encodeURIComponent(message);
+            whatsappBtn.href = `https://wa.me/525533355687?text=${encodedMessage}`;
+            whatsappBtn.style.display = totalItems > 0 ? 'inline-block' : 'none';
+        }
+
+        window.clearCart = function() {
+            cart.length = 0;
+            updateCart();
+        };
+
+        window.toggleCart = function() {
+            const cart = document.getElementById('cart');
+            cart.style.display = cart.style.display === 'none' || cart.style.display === '' ? 'block' : 'none';
+        };
+
+        window.toggleModal = function() {
+            const modal = document.getElementById('edit-modal');
+            modal.style.display = modal.style.display === 'none' || modal.style.display === '' ? 'block' : 'none';
+        };
+
+        window.toggleProductModal = function() {
+            const modal = document.getElementById('product-modal');
+            modal.style.display = modal.style.display === 'none' || modal.style.display === '' ? 'block' : 'none';
+        };
+
+        window.onclick = function(event) {
+            const modals = [document.getElementById('edit-modal'), document.getElementById('product-modal')];
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        };
+
+        displayProducts(products.slice(0, 6), 'horizontal', 'menu-horizontal');
+        displayProducts(products, 'vertical', 'menu-vertical');
+    });
+</script>
+
+</body>
+</html>
