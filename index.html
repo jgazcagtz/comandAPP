@@ -421,7 +421,7 @@
             <p>Notas:</p>
             <textarea id="order-notes" placeholder="Agrega notas adicionales..." oninput="updateWhatsAppLink()"></textarea>
             <p><a id="whatsapp-btn" href="#" target="_blank">Enviar orden a cocina</a></p>
-            <button id="edit-cart-btn" onclick="toggleModal()">Revisar Detalles</button>
+            <button id="edit-cart-btn" onclick="toggleModal()">Editar Orden</button>
             <button id="refresh-btn" onclick="clearCart()">Limpiar Orden</button>
         </div>
         <button id="cart-btn" onclick="toggleCart()">🛒</button>
@@ -490,14 +490,14 @@
                     <h3>${product.name}</h3>
                     <p>$${product.price.toFixed(2)}</p>
                     <p>${product.includes}</p>
-                    <select id="quantity-${index}" onchange="updateSelectedProductQuantity(${index})">
+                    <select id="quantity-${index}-${layout}" onchange="updateSelectedProductQuantity(${index}, '${layout}')">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <p><button class="choose-btn" onclick="showProductModal(${index})">Elegir</button></p>
+                    <p><button class="choose-btn" onclick="showProductModal(${index}, '${layout}')">Elegir</button></p>
                 </div>
             `;
             return productItem;
@@ -511,15 +511,13 @@
             });
         }
 
-        window.updateSelectedProductQuantity = function(index) {
-            const quantitySelect = document.getElementById(`quantity-${index}`);
+        window.updateSelectedProductQuantity = function(index, layout) {
+            const quantitySelect = document.getElementById(`quantity-${index}-${layout}`);
             selectedProduct = { ...products[index], quantity: parseInt(quantitySelect.value) };
         }
 
-        window.showProductModal = function(index) {
-            const quantitySelect = document.getElementById(`quantity-${index}`);
-            const quantity = parseInt(quantitySelect.value);
-            selectedProduct = { ...products[index], quantity };
+        window.showProductModal = function(index, layout) {
+            updateSelectedProductQuantity(index, layout); // Ensure selected quantity is updated
 
             const modalContent = document.getElementById('product-modal-content');
             modalContent.innerHTML = `
@@ -550,7 +548,6 @@
         window.updateCart = function() {
             const cartItemsSection = document.getElementById('cart-items');
             const cartTotal = document.getElementById('cart-total');
-            const whatsappBtn = document.getElementById('whatsapp-btn');
             const editCartItems = document.getElementById('edit-cart-items');
 
             cartItemsSection.innerHTML = '';
