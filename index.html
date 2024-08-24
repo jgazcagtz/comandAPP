@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -163,13 +164,13 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            max-width: 90%;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 100%;
+            max-width: 400px;
             display: none;
             overflow-y: auto;
-            max-height: 80vh;
             z-index: 1000;
         }
 
@@ -282,6 +283,23 @@
         }
 
         #cart-btn:hover {
+            background-color: #333;
+        }
+
+        #close-cart-btn {
+            padding: 10px 20px;
+            background-color: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #close-cart-btn:hover {
             background-color: #333;
         }
 
@@ -421,8 +439,9 @@
             <p>Notas:</p>
             <textarea id="order-notes" placeholder="Agrega notas adicionales..." oninput="updateWhatsAppLink()"></textarea>
             <p><a id="whatsapp-btn" href="#" target="_blank">Enviar orden a cocina</a></p>
-            <button id="edit-cart-btn" onclick="toggleModal()">Editar Orden</button>
+            <button id="edit-cart-btn" onclick="toggleModal()">Revisar Detalles</button>
             <button id="refresh-btn" onclick="clearCart()">Limpiar Orden</button>
+            <button id="close-cart-btn" onclick="toggleCart()">Cerrar Carrito</button>
         </div>
         <button id="cart-btn" onclick="toggleCart()">🛒</button>
         
